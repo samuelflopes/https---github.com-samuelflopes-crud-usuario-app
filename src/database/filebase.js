@@ -1,4 +1,5 @@
-// Your web app's Firebase configuration
+import firebase from  'firebase'
+
 const firebaseConfig = {
     apiKey: "AIzaSyDoGf7TqcGc7Axa6fUFoFhkjY22BSSNCYU",
     authDomain: "app-crud-e7ae5.firebaseapp.com",
@@ -9,4 +10,7 @@ const firebaseConfig = {
   };
   
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  let fireDb = firebase.initializeApp(firebaseConfig);
+
+  //export the fireDb variable
+  export default fireDb.database().ref();
