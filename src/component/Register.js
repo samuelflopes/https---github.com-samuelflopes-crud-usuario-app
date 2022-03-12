@@ -11,8 +11,7 @@ const Register = () => {
 
 
 //function button
-    let[idAtual, setIdAtual] = useState('')
-
+    let [idAtual, setIdAtual] = useState('')
 
     useEffect( () => {
         fireDb.child('usuario').on('value', dbPhoto =>{
@@ -20,22 +19,52 @@ const Register = () => {
                 setDadosUsuarios({
                     ...dbPhoto.val()
                 })
+            }else{
+                setDadosUsuarios([])
             }
         })
     }, [])
 
 // Função de adicionar e editar 
+
+/*Se os dados estiverem vazios esta função irá adicionar
+caso contrario irá para o else que pegará o Id e atualizará*/
     const addEdit = obj => {
-        
-        console.log(obj)
-        fireDb.child('usuario').push(
-            obj,
-            error => {
-                if(error){
-                    console.log(error)
+        if(idAtual == ''){
+            console.log(obj)
+            fireDb.child('usuario').push(
+                obj,
+                error => {
+                    if(error){
+                        console.log(error)
+                    }else{
+                        setIdAtual('')
+                    }
                 }
-            }
-        )
+            )
+        } else {
+            fireDb.child(`usuario/${idAtual}`).set(
+                obj, 
+                err => {
+                    if(err) {
+                        console.log(err)
+                    }
+                }
+            )
+        }
+    }
+
+    const deleteUsuario = key =>{
+        if(window.confirm('Deseja deletar este usuário  ?'))
+            fireDb.child(`usuario/${key}`).remove(
+                err =>{
+                    if(err){
+                        console.log(err)
+                    }
+                }
+            )
+
+
     }
 
     return (
@@ -48,7 +77,7 @@ const Register = () => {
             </div>
                 <div className = "row">
                     <div className = "col-md-5">
-                        <FormsRegister addEdit={addEdit} />
+                        <FormsRegister {...({addEdit, idAtual, dadosUsuarios})} />
                     </div>
                     <div className="col-md-7">
                         <table className="table table-boderless tables-stripped">
@@ -76,11 +105,11 @@ const Register = () => {
                                             <td>{dadosUsuarios[id].estado}</td>
 
                                             <td>
-                                                <a className='btn btn-primary' onClick={() => {setIdAtual(id)}}>
+                                                <a className='btn btn-primary' onClick={ () => {setIdAtual(id)}}>
                                                     <i className='fas fa-pencil-alt'></i>
                                                 </a>
 
-                                                <a className='btn btn-danger'>
+                                                <a className='btn btn-danger' onClick={ () => deleteUsuario(id)}>
                                                     <i className='fas fa-trash-alt'></i>
                                                 </a>
                                                 

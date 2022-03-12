@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const FormsRegister = (props) =>  {
 
@@ -15,6 +15,19 @@ const initialvalues = {
 
 //captura e manipulação dos valores 
 let [values, setValues] = useState(initialvalues)
+
+//Clicando em editar os dados voltam para os campos de edição
+useEffect( () => {
+    if(props.idAtual == '') {
+        setValues({
+            ...initialvalues
+        })
+    } else {
+        setValues({
+            ...props.dadosUsuarios[props.idAtual]
+        })
+    }
+}, [props.idAtual, props.dadosUsuarios])
 
 //Manipulação dos dados
 const manipulateInputChange = e => {
@@ -110,7 +123,7 @@ const manipulatesubmit = e =>{
             </div>
 
             <div className='form-group'>
-                <input type="submit" value="Salvar"className="btn btn-primary btn-block" />
+                <input type="submit" value= {props.idAtual == '' ? 'Salvar' : 'Atualizar'} className="btn btn-primary btn-block" />
             </div>
 
          </form>
