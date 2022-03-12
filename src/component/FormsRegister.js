@@ -1,22 +1,119 @@
 import React, { useState } from 'react';
 
-const FormsRegister = () =>  {
+const FormsRegister = (props) =>  {
 
     //Variable capture dados
 const initialvalues = {
-    nome: '',
+    nomeCompleto: '',
     telefone:'',
     cpf: '',
     cep: '',
-    Logradouro: '',
-    cidadeEstado: ''
+    logradouro: '',
+    cidade: '',
+    estado: ''
 }
 
 //captura e manipulação dos valores 
-let { valor, setValues } = useState( initialvalues )
+let [values, setValues] = useState(initialvalues)
+
+//Manipulação dos dados
+const manipulateInputChange = e => {
+    let {name, value} = e.target
+
+    setValues({
+        ...values,
+        [name]: value
+    })
+}
+
+// Prevenção do comportamento padrão: Ao clicar em submit enviar para outra página
+const manipulatesubmit = e =>{
+    e.preventDefault()
+    props.addEdit(values)
+}
 
     return (
-        <h1> Formulario </h1>
+        <form autoComplete="off" onSubmit={manipulatesubmit}> 
+            <div className = "form-group input-group">
+                <div className = "input-group-prepend">
+                    <div className = "input-group-text">
+                        <i className = "fas fa-user"></i>
+                    </div>
+                </div>
+
+                    <input className = "form-control" placeholder = "Nome Completo" name="nomeCompleto"  value={values.nomeCompleto} onChange={manipulateInputChange} />
+            </div>
+
+            <div className = "row">
+                <div className = "form-group input-group col-md-6">
+                    <div className = "input-group-prepend ">
+                        <div className = "input-group-text ">
+                            <i className = "fas fa-mobile "></i>
+                        </div>
+                    </div>
+                        <input className = "form-control" placeholder = "Telefone" name="telefone"value = {values.telefone} onChange={manipulateInputChange}/>
+                </div>
+            </div>
+            <div className = "row">
+                <div className = " form-group input-group col-md-6">
+                    <div className = "input-group-prepend">
+                        <div className = "input-group-text">
+                            <i className = "fas fa-location-arrow"></i>
+                        </div>
+                    </div>
+                        <input className = "form-control" placeholder = "CPF" name="cpf" value = {values.cpf} onChange={manipulateInputChange}/>
+                </div>
+            </div>
+
+            <div className = "row">
+                <div className = "form-group input-group col-md-6">
+                    <div className = "input-group-prepend">
+                        <div className = "input-group-text">
+                        <i className="fas fa-clock"></i>
+                        </div>
+                    </div>
+                        <input className = "form-control" placeholder = "CEP" name="cep" value = {values.cep} onChange={manipulateInputChange}/>
+                </div>
+            </div>
+
+            <div className = "row">
+                <div className = "form-group input-group col-md-6">
+                    <div className = "input-group-prepend">
+                        <div className = "input-group-text">
+                            <i className = "fas fa-search-location"></i>
+                        </div>
+                    </div>
+                        <input className = "form-control" placeholder = "logradouro" name="logradouro"value = {values.logradouro} onChange={manipulateInputChange}/>
+                </div>
+            </div>
+
+            <div className = "row">
+                <div className = " form-group input-group col-md-6">
+                    <div className = "input-group-prepend">
+                        <div className = "input-group-text ">
+                            <i className = "fas fa-city"></i>
+                        </div>
+                    </div>
+                        <input className = "form-control" placeholder = "Cidade" name="cidade" value = {values.cidade} onChange={manipulateInputChange}/>
+                </div>
+            </div>
+
+            <div className = "row">
+                <div className = " form-group input-group col-md-6">
+                    <div className = "input-group-prepend">
+                        <div className = "input-group-text">
+                            <i className = "fas fa-building"></i>
+                        </div>
+                    </div>
+                        <input className = "form-control" placeholder = "estado" name="estado" value = {values.estado} onChange={manipulateInputChange}/>
+                </div>
+            </div>
+
+            <div className='form-group'>
+                <input type="submit" value="Salvar"className="btn btn-primary btn-block" />
+            </div>
+
+         </form>
     )
 
 }
