@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-
 const FormsRegister = (props) =>  {
 
     //Variable capture dados
 const initialvalues = {
-    nomeCompleto: '',
+    nomeCompleto: '', 
     telefone:'',
     cpf: '',
-    cep: '',
+    cep:'',
     logradouro: '',
     cidade: '',
     estado: ''
-}
+    }
+
+
+
 
 //captura e manipulação dos valores 
 let [values, setValues] = useState(initialvalues)
@@ -46,6 +48,7 @@ const manipulatesubmit = e =>{
 }
 
     return (
+        
         <form autoComplete="off" onSubmit={manipulatesubmit}> 
             <div className = "form-group input-group">
                 <div className = "input-group-prepend">
@@ -64,7 +67,8 @@ const manipulatesubmit = e =>{
                             <i className = "fas fa-mobile "></i>
                         </div>
                     </div>
-                        <input className = "form-control" placeholder = "Telefone" name="telefone"value = {values.telefone} onChange={manipulateInputChange}/>
+                    
+                        <input className = "form-control" type="number"  placeholder = "Telefone" name="telefone"value = {values.telefone} onChange={manipulateInputChange}/>
                 </div>
             </div>
             <div className = "row">
@@ -74,7 +78,7 @@ const manipulatesubmit = e =>{
                             <i className = "fas fa-location-arrow"></i>
                         </div>
                     </div>
-                        <input className = "form-control" placeholder = "CPF" name="cpf" value = {values.cpf} onChange={manipulateInputChange}/>
+                        <input className = "form-control" type="number" placeholder = "CPF" name="cpf" value = {values.cpf} onChange={manipulateInputChange}/>
                 </div>
             </div>
 
@@ -82,10 +86,10 @@ const manipulatesubmit = e =>{
                 <div className = "form-group input-group col-md-6">
                     <div className = "input-group-prepend">
                         <div className = "input-group-text">
-                        <i className="fas fa-clock"></i>
+                        <i className="fa fa-map" aria-hidden="true"></i>
                         </div>
                     </div>
-                        <input className = "form-control" placeholder = "CEP" name="cep" value = {values.cep} onChange={manipulateInputChange}/>
+                        <input className = "form-control" type="number" placeholder = "CEP" name="cep" value = {values.cep} onChange={manipulateInputChange}/>
                 </div>
             </div>
 
@@ -128,6 +132,7 @@ const manipulatesubmit = e =>{
 
          </form>
     )
+    
 
 }
 
