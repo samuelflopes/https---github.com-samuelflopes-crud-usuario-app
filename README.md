@@ -1,10 +1,12 @@
 > #######  DETALHES  #######
- Banco de Dados > (FireBase)
+
+Banco de Dados > (FireBase)
 
 SISTEMA CRUD DE CADASTROS DE USUÁRIOS
 
-Para iniciar o projeto inicie com`npm start`
+Para iniciar o projeto inicie com `npm start`
 
+Version fireBase "firebase": "^8.10.0".
 1. Os setes campos podem ser preenchidos correspondentemente
 aos dados necessários.
 
